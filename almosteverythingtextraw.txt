@@ -1,0 +1,120 @@
+	.text
+	.globl main
+
+main:			
+	la $a0, msg_commands 	
+	li $v0, 4 		
+	syscall			
+	
+	li $v0, 5 		
+	syscall			
+
+	beqz $v0, exit		
+	sub $v0, $v0, 1
+
+	beqz $v0, oper_add
+	sub $v0, $v0, 1
+	
+	beqz $v0, oper_sub
+	sub $v0, $v0, 1
+	
+	beqz $v0, oper_multiply
+	sub $v0, $v0, 1
+	
+	beqz $v0, oper_divide
+	sub $v0, $v0, 1
+	
+	beqz $v0, oper_average
+	sub $v0, $v0, 1
+	
+	beqz $v0, oper_f_to_c
+	sub $v0, $v0, 1
+	
+	beqz $v0, oper_c_to_f
+	sub $v0, $v0, 1
+	
+	beqz $v0, oper_feet_to_m
+	sub $v0, $v0, 1
+	
+	beqz $v0, oper_m_to_feet
+	j main	
+
+oper_add:
+	la $a0, add_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+oper_sub:
+	la $a0, sub_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+oper_multiply:
+	la $a0, mul_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+oper_divide:
+	la $a0, div_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+oper_average:
+	la $a0, avg_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+oper_f_to_c:
+	la $a0, ftoc_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+oper_c_to_f:
+	la $a0, ctof_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+oper_feet_to_m:
+	la $a0, ftom_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+oper_m_to_feet:	
+	la $a0, mtof_msg		
+	li $v0, 4 
+	syscall	
+	
+	j main	
+
+exit:	
+	la $a0,	exit_msg	
+	li $v0, 4	
+	syscall			
+	
+	li $v0, 10		
+	syscall			
+
+	.data
+
+msg_commands: 		.asciiz 	"\nOperation Types, type number to select operation: (0-exit, 1-add, 2-subtract, 3-multiply, 4-divide, 5-average, 6-f->c, 7-c->f, 8-feet->meter, 9-meter->feet)"
+
+add_msg: 		.asciiz 	"\nAdd"
+sub_msg: 		.asciiz 	"\nSub"
+mul_msg: 		.asciiz 	"\nMul"
+div_msg: 		.asciiz 	"\nDiv"
+avg_msg: 		.asciiz 	"\navg"
+ftoc_msg: 		.asciiz 	"\nftoc"
+ctof_msg: 		.asciiz 	"\nctof"
+ftom_msg: 		.asciiz 	"\nftom"
+mtof_msg: 		.asciiz 	"\nmtof"
+nbslh: 			.asciiz 	"\n"
+exit_msg: 		.asciiz 	"\nProgram Exited\n"
+	
